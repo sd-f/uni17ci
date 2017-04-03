@@ -26,8 +26,8 @@ def design_matrix(x, degree):
 
     EX: for the data x = [0,1,2] and degree 2
     the function should return: [[1, 0, 0],
-								 [1, 1, 1],
-								 [1, 2, 4]] 
+                                [1, 1, 2],
+                                [1, 2, 4]] 
 
     :param x: numpy array of shape (N,1)
     :param degree: Higher degree of the polynomial
@@ -43,10 +43,21 @@ def design_matrix(x, degree):
     # Look at the function description for more info
     #
     # TIP: use the power function from numpy
-
-    X = x  # TODO: change me
-
     #
+    m = x.shape[0]
+    n_plus_1 = degree + 1
+    X = np.ones([m, n_plus_1])
+
+    """
+    # not working, from newsgroup info
+    for j in range(0, m):
+        for i in range(0, n_plus_1):
+            X[j, i] = x[i] ** j
+    """
+    coefficients = np.arange(n_plus_1);
+    for i in range(0, m):
+        X[i, :] = np.power(x[i], coefficients)
+
     # END TODO
     ######################
 
@@ -80,7 +91,12 @@ def train(x, y, degree):
     #   pinv is accessible in the sub-library numpy.linalg
     #
 
-    theta_opt = np.zeros(degree + 1)  # TODO: Change me
+    X = design_matrix(x, degree)
+
+    theta_opt = np.linalg.pinv(X).dot(y)
+
+    # according to books np.linalg.lstsq should be used
+
     # END TODO
     ######################
 
@@ -112,8 +128,9 @@ def compute_error(theta, degree, x, y):
     #               Then * becomes a matrix multiplication
     #
     #  - One can use the numpy function mean
+    #
 
-    err = -1  # TODO: Change me
+    err = (theta.dot(np.matrix(x.T)) - y.T).mean()
 
     #
     # END TODO
