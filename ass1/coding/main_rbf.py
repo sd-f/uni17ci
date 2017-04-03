@@ -23,7 +23,7 @@ TODO boxes are to be found in 'rbf.py'
 
 def main():
     # Set the n_centers of the polynomial expansion
-    n_centers = 5
+    n_centers = 40
 
     data_path = 'data_linreg.json'
 

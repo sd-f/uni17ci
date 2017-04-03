@@ -83,7 +83,8 @@ def design_matrix(x, centers, sigma):
 
     for i in range(0, N):
         for j in range(1, M):
-            X[i, j] = np.exp((x[i]-centers[j-1] * 1.) ** 2 / (2. * sigma ** 2))
+            tmp_x = -1 * np.power(x[i]-centers[j-1], 2)
+            X[i, j] = np.exp(tmp_x / (2. * sigma ** 2))
 
     # END TODO
     ######################
@@ -154,7 +155,7 @@ def compute_error(theta, n_centers, x, y):
     sum = 0
     for i in range(0, M):
         sum += np.power(X[i].dot(theta) - y[i], 2)
-    err = np.asscalar(sum / M)
+    err = (sum / M)[0]
 
     # END TODO
     ######################

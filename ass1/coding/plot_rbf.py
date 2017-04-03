@@ -92,7 +92,15 @@ def plot_errors(i_best, n_centers, mse_train, mse_val, mse_test):
     # Tips:
     #  - Don't forget to make everything readable with legend title
 
-    plt.plot(n_centers, n_centers, label='Change me', linewidth=3)
+    for mse, lab in zip([mse_train, mse_val, mse_test], ['train', 'val', 'test']):
+        plt.plot(n_centers, mse, label=lab, linewidth=3)
+
+    plt.ylim([0, 1])
+    plt.axvline(x=n_centers[i_best], color='black', linestyle='--', linewidth=3,
+                label='Optimal degree {}'.format(n_centers[i_best]))
+    plt.xlabel('Centers')
+    plt.ylabel('MSE')
+    plt.legend()
 
     #
     # END TODO
