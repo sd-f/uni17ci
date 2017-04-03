@@ -23,7 +23,7 @@ TODO boxes are to be found in 'poly.py'
 
 def main():
     # Set the degree of the polynomial expansion
-    degree = 5
+    degree = 21
     data_path = 'data_linreg.json'
 
     # Load the data

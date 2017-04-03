@@ -95,8 +95,6 @@ def train(x, y, degree):
 
     theta_opt = np.linalg.pinv(X).dot(y)
 
-    # according to books np.linalg.lstsq should be used
-
     # END TODO
     ######################
 
@@ -129,8 +127,25 @@ def compute_error(theta, degree, x, y):
     #
     #  - One can use the numpy function mean
     #
+    # M = X.shape[0]
+    # sum = 0
+    # for i in range(0, M):
+    #    sum = sum + (X[i].dot(theta) - y[i]) ** 2
+    # not working
+    #print(np.linalg.norm(X.dot(theta) - np.matrix(y)))
+    #err = (np.linalg.norm(X.dot(theta) - np.matrix(y))).mean()
+    # print(err)
+    # from https://docs.scipy.org/doc/numpy/reference/generated/numpy.linalg.lstsq.html
+    #c, err, a, b = np.linalg.lstsq(X.dot(theta), y)
 
-    err = (theta.dot(np.matrix(x.T)) - y.T).mean()
+    # FIXME not the best way to do this
+    X = design_matrix(x, degree)
+    M = X.shape[0]
+    sum = 0
+    for i in range(0, M):
+        sum += (X[i].dot(theta) - y[i]) ** 2
+    err = np.asscalar(sum / M)
+
 
     #
     # END TODO

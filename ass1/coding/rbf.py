@@ -37,8 +37,8 @@ def get_centers_and_sigma(n_center):
     #       an euclidian division. The solution is to convert one of the two integers to float.
     #
 
-    centers = np.zeros(n_center)  # TODO: Change me
-    sigma = 1.  # TODO: Change me
+    centers = np.linspace(-1., 1., n_center)
+    sigma = 2. / n_center
 
     # END TODO
     ######################
@@ -76,12 +76,19 @@ def design_matrix(x, centers, sigma):
     # TIP: don't forget that the first row has only ones
     #
 
-    res = x  # TODO: Change me
+    N = x.shape[0]
+    M = centers.shape[0] + 1
+
+    X = np.ones([N, M])
+
+    for i in range(0, N):
+        for j in range(1, M):
+            X[i, j] = np.exp((x[i]-centers[j-1] * 1.) ** 2 / (2. * sigma ** 2))
 
     # END TODO
     ######################
 
-    return res
+    return X
 
 
 def train(x, y, n_center):
@@ -107,7 +114,10 @@ def train(x, y, n_center):
     #   - This should not be very different from the solution you provided in poly.py
     #
 
-    theta_opt = np.zeros(n_center + 1)  # TODO: Change me
+    centers, sigma = get_centers_and_sigma(n_center)
+    X = design_matrix(x, centers, sigma)
+
+    theta_opt = np.linalg.pinv(X).dot(y)
 
     # END TODO
     ######################
@@ -138,7 +148,13 @@ def compute_error(theta, n_centers, x, y):
     #   - This should not be very different from the solution you provided in poly.py
     #
 
-    err = -1  # TODO: Change me
+    centers, sigma = get_centers_and_sigma(n_centers)
+    X = design_matrix(x, centers, sigma)
+    M = X.shape[0]
+    sum = 0
+    for i in range(0, M):
+        sum += np.power(X[i].dot(theta) - y[i], 2)
+    err = np.asscalar(sum / M)
 
     # END TODO
     ######################
