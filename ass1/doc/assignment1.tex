@@ -154,8 +154,126 @@
 \subsection{Logistic Regression training with gradient descent and scipy.optimize}
 
 \subsubsection{Gradient descent}
+\begin{enumerate}
+  \item \textbf{check\_gradient} explaination
+  
+  The function check whether the regression functions are really converging at a
+  certain rate. To avoid divergence ;)
+  \item \textbf{gradient descent} degree $l = 1$, 20 and 2000 iterations,
+  learning rate $\eta = 1$
+  	\begin{figure}[H]
+  	\centering
+	        \includegraphics[width=\textwidth]{figures/logreg_d5_it20_1.png}
+	    \caption{Logistic Regression ($\eta = 1$, $l = 1$, 20 iterations)}
+	\end{figure}
+	\begin{figure}[H]
+  	\centering
+	        \includegraphics[width=\textwidth]{figures/logreg_d5_it20_1_error.png}
+	    \caption{Logistic Regression Errors ($\eta = 1$, $l = 1$, 20 iterations)}
+	\end{figure}
+	\begin{figure}[H]
+  	\centering
+	        \includegraphics[width=\textwidth]{figures/logreg_d5_it2000_1.png}
+	    \caption{Logistic Regression ($\eta = 1$, $l = 1$, 2000 iterations)}
+	\end{figure}
+	\begin{figure}[H]
+  	\centering
+	        \includegraphics[width=\textwidth]{figures/logreg_d5_it2000_1_error.png}
+	    \caption{Logistic Regression Errors ($\eta = 1$, $l = 1$, 2000 iterations)}
+	\end{figure}
+	\item \textbf{gradient descent} degree $l = 2$, 200 iterations,
+	learning rate $\eta = 0.15, 1.5, 15$
+	\begin{figure}[H]
+  	\centering
+	        \includegraphics[width=\textwidth]{figures/logreg_d2_it200_015.png}
+	    \caption{Logistic Regression ($\eta = 0.15$, $l = 1$, 200 iterations)}
+	\end{figure}
+	\begin{figure}[H]
+  	\centering
+	        \includegraphics[width=\textwidth]{figures/logreg_d2_it200_015_error.png}
+	    \caption{Logistic Regression Errors ($\eta = 0.15$, $l = 1$, 200
+	    iterations)}
+	\end{figure}
+	\begin{figure}[H]
+  	\centering
+	        \includegraphics[width=\textwidth]{figures/logreg_d2_it200_15.png}
+	    \caption{Logistic Regression ($\eta = 1.5$, $l = 1$, 200 iterations)}
+	\end{figure}
+	\begin{figure}[H]
+  	\centering
+	        \includegraphics[width=\textwidth]{figures/logreg_d2_it200_15_error.png}
+	    \caption{Logistic Regression Errors ($\eta = 1.5$, $l = 1$, 200
+	    iterations)}
+	\end{figure}
+	\begin{figure}[H]
+  	\centering
+	        \includegraphics[width=\textwidth]{figures/logreg_d2_it200_15_.png}
+	    \caption{Logistic Regression ($\eta = 15$, $l = 1$, 200 iterations)}
+	\end{figure}
+	\begin{figure}[H]
+  	\centering
+	        \includegraphics[width=\textwidth]{figures/logreg_d2_it200_15_.png}
+	    \caption{Logistic Regression Errors ($\eta = 15$, $l = 1$, 200
+	    iterations)}
+	\end{figure}
+	
+	Discussion: Too low or too hight learning rates lead to divergence or spinning
+	between lower and hight cost (oscillates).
+	\item \textbf{Adaptative gradient descent (GDad)} degree $l
+	= 1, 2, 5, 15$, 1000 iterations, learning rate $\eta = 1$
+	\begin{figure}[H]
+  	\centering
+	        \includegraphics[width=\textwidth]{figures/logreg_adapt_1.png}
+	    \caption{Logistic Regression (adaptive) ($\eta = 1$, $l = 1$, 1000
+	    iterations)}
+	\end{figure}
+	\begin{figure}[H]
+  	\centering
+	        \includegraphics[width=\textwidth]{figures/logreg_adapt_1_error.png}
+	    \caption{Logistic Regression (adaptive) Errors ($\eta = 1$, $l = 1$, 1000
+	    iterations)}
+	\end{figure}
+	\begin{figure}[H]
+  	\centering
+	        \includegraphics[width=\textwidth]{figures/logreg_adapt_2.png}
+	    \caption{Logistic Regression (adaptive) ($\eta = 1$, $l = 2$, 1000
+	    iterations)}
+	\end{figure}
+	\begin{figure}[H]
+  	\centering
+	        \includegraphics[width=\textwidth]{figures/logreg_adapt_2_error.png}
+	    \caption{Logistic Regression (adaptive) Errors ($\eta = 1$, $l = 2$, 1000
+	    iterations)}
+	\end{figure}
+	\begin{figure}[H]
+  	\centering
+	        \includegraphics[width=\textwidth]{figures/logreg_adapt_5.png}
+	    \caption{Logistic Regression (adaptive) ($\eta = 1$, $l = 5$, 1000
+	    iterations)}
+	\end{figure}
+	\begin{figure}[H]
+  	\centering
+	        \includegraphics[width=\textwidth]{figures/logreg_adapt_5_error.png}
+	    \caption{Logistic Regression (adaptive) Errors ($\eta = 1$, $l = 5$, 1000
+	    iterations)}
+	\end{figure}
+	\begin{figure}[H]
+  	\centering
+	        \includegraphics[width=\textwidth]{figures/logreg_adapt_15.png}
+	    \caption{Logistic Regression (adaptive) ($\eta = 1$, $l = 15$, 1000
+	    iterations)}
+	\end{figure}
+	\begin{figure}[H]
+  	\centering
+	        \includegraphics[width=\textwidth]{figures/logreg_adapt_15_error.png}
+	    \caption{Logistic Regression (adaptive) Errors ($\eta = 1$, $l = 15$, 1000
+	    iterations)}
+	\end{figure}
+	\item Stopping
+	When error between iteration becomes too low, threshold regression should be
+	stopped.
+\end{enumerate}
 
-\subsubsection{Adaptative gradient descent}
 
 \subsubsection{Scipy optimizer}
 

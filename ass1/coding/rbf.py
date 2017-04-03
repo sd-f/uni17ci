@@ -83,7 +83,8 @@ def design_matrix(x, centers, sigma):
 
     for i in range(0, N):
         for j in range(1, M):
-            tmp_x = -1 * np.power(x[i]-centers[j-1], 2)
+            # to avoid runtime overflow problems
+            tmp_x = -1 * np.power(x[i]-centers[j - 1], 2)
             X[i, j] = np.exp(tmp_x / (2. * sigma ** 2))
 
     # END TODO
@@ -152,10 +153,10 @@ def compute_error(theta, n_centers, x, y):
     centers, sigma = get_centers_and_sigma(n_centers)
     X = design_matrix(x, centers, sigma)
     M = X.shape[0]
-    sum = 0
+    sum_ = 0
     for i in range(0, M):
-        sum += np.power(X[i].dot(theta) - y[i], 2)
-    err = (sum / M)[0]
+        sum_ = sum_ + np.power(X[i].dot(theta) - y[i], 2)
+    err = (sum_ / M)[0]
 
     # END TODO
     ######################

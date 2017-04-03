@@ -31,6 +31,14 @@ def cost(theta, x, y):
     # Write the cost of logistic regression as defined in the lecture
 
     c = 0
+    for i in range(0, N):
+        p = sig(x[i].dot(theta))
+        if y[i] == 0:
+            c += np.log(1 - p)
+        else:
+            c += np.log(p)
+
+    c = -c / N
 
     # END TODO
     ###########
@@ -56,6 +64,13 @@ def grad(theta, x, y):
     #
 
     g = np.zeros(theta.shape)
+
+    for i in range(0, g.shape[0]):
+        sum_ = 0
+        for j in range(0, N):
+            p = sig(x[j].dot(theta))
+            sum_ = sum_ + (p - y[j]) * x[j][i]
+        g[i] = sum_ / N
 
     # END TODO
     ###########

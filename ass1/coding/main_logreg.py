@@ -21,9 +21,9 @@ This is the main file that loads the data, compute the solution and plot the res
 
 def main():
     # Set parameters
-    degree = 5
-    eta = 1.
-    max_iter = 20
+    degree = 15
+    eta = 1
+    max_iter = 1000
 
     # Load data and expand with polynomial features
     f = open('data_logreg.json', 'r')
@@ -46,10 +46,10 @@ def main():
     theta0 = np.zeros(n)
 
     #### VARIANT 1: Optimize with gradient descent
-    theta_opt, E_list = gd.gradient_descent(f, df, theta0, eta, max_iter)
+    #theta_opt, E_list = gd.gradient_descent(f, df, theta0, eta, max_iter)
 
     #### VARIANT 2: Optimize with gradient descent
-    # theta_opt, E_list, l_rate_final = gd.adaptative_gradient_descent(f, df, theta0, eta, max_iter)
+    theta_opt, E_list, l_rate_final = gd.adaptative_gradient_descent(f, df, theta0, eta, max_iter)
     # print('Adaptative gradient, final learning rate: {:.3g}'.format(l_rate_final))
 
     #### VARIANT 3: Optimize with gradient descent
