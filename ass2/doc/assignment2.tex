@@ -9,6 +9,7 @@
 \usepackage{float}
 \usepackage{amssymb,amsmath,wasysym}
 
+\addbibresource{bib1.bib}
 
 \begin{document}
 
@@ -56,7 +57,7 @@
 
 \section{Regression with Neural Networks}
 
-\subsubsection{Simple Regression with Neural Networks}
+\subsection{Simple Regression with Neural Networks}
 
 \begin{enumerate}[a)]
   
@@ -64,33 +65,38 @@
   
   \item \textbf{Learned function}
   
+Following plots show the learned function after ``fitting'' data sets to neural
+network Python scikit-learn\autocite{scikit} using different numbers of neurons
+in 1 hidden layer in den netowrk.
+  
 \begin{figure}[H]
 	\centering
-  \includegraphics[width=\textwidth]{figures/1_1_a_hn_2.png}
+  \includegraphics[width=0.9\textwidth]{figures/1_1_a_hn_2.png}
 	\caption{NN Learned function $h_n=2$}
 	\label{1_1_a_hn_2}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-  \includegraphics[width=\textwidth]{figures/1_1_a_hn_8.png}
+  \includegraphics[width=0.9\textwidth]{figures/1_1_a_hn_8.png}
 	\caption{NN Learned function $h_n=8$}
 	\label{1_1_a_hn_8}
 \end{figure}
 
 \begin{figure}[H]
 	\centering
-  \includegraphics[width=\textwidth]{figures/1_1_a_hn_40.png}
+  \includegraphics[width=0.9\textwidth]{figures/1_1_a_hn_40.png}
 	\caption{NN Learned function $h_n=40$}
 	\label{1_1_a_hn_40}
 \end{figure}
   
-\textbf{Discussion: } $2$ hidden layer are cleary an underfitting
-parametrization (missing a lot of data points), $h_n = 8$ seems to miss data
-points where $ x = 0.0$, $40$ hidden layer tend to overfit a little (see slope
-around $x = 1.5$ is going up again). As shown in Figure \ref{1_1_a_hn_100} $100$
-hidden layers seem to recognize the concarve slope around $x = 0.0$ but is also
-overfitting at $x > 1.2$.
+\textbf{Discussion: } $2$ ``neurons'' in the hidden layer are cleary an
+underfitting parametrization (missing a lot of data points), $h_n = 8$ seems to
+miss data points where $ x = 0.0$, $40$ nodes tend to overfit a little (see
+slope around $x = 1.5$ is going up again). As shown in Figure \ref{1_1_a_hn_100}
+$100$ hidden layers seem to recognize the concarve slope around $x = 0.0$ but is
+also overfitting at $x > 1.2$. From this Traning data there is no saying if this
+curve should be added. I added it just because it is possible.
 
 \begin{figure}[H]
 	\centering
@@ -136,11 +142,17 @@ Test MSE \\
 
 \begin{itemize}
   \item Best $h_n$ would be $40$ on the Testing Set and $20$ (already) on the
-  Training Set (recommend ``Early Stopping'').
-  \item Starting with a little underfitting but getting less with growing $h_n$
+  Training Set (recommend ``Early Stopping'', no significant $\Delta$ after
+  $20$).
+  \item Different random seed in combination with low $h_n$ can have effects
+  either way, under- as well as overfitting tendencies.
+  \item Starting with a little underfitting but getting less with growing $h_n$.
 \end{itemize}
+
+  \item \textbf{Variations of MSE during training}
 
 \end{enumerate}
 
+\printbibliography
 
 \end{document}
