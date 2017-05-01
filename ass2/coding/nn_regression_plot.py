@@ -39,7 +39,7 @@ def plot_mse_vs_neurons(train_mses, test_mses, n_hidden_neurons_list):
     plt.show()
 
 
-def plot_mse_vs_iterations(train_mses, test_mses, n_iterations, hidden_neuron_list):
+def plot_mse_vs_iterations(train_mses, test_mses, n_iterations, hidden_neuron_list, solver_label=None):
     """
     Plot the mean squared errors as a function of n_iterations
     :param train_mses: Array of training MSE of shape (len(hidden_neuron_list),n_iterations)
@@ -49,7 +49,10 @@ def plot_mse_vs_iterations(train_mses, test_mses, n_iterations, hidden_neuron_li
     :return:
     """
     plt.figure()
-    plt.title("Variation of MSE across iterations".format(hidden_neuron_list))
+    title = "Variation of MSE across iterations".format(hidden_neuron_list)
+    if solver_label:
+        title = title + " Solver: " + solver_label
+    plt.title(title)
 
     color = ['blue','orange','red','green','purple']
 

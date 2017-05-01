@@ -51,13 +51,13 @@ def main():
     #ex_1_1_c(x_train, x_test, y_train, y_test)
 
     # 1.1 d)
-    ex_1_1_d(x_train, x_test, y_train, y_test)
+    #ex_1_1_d(x_train, x_test, y_train, y_test)
 
     ## 1.2 a)
-    # ex_1_2_a(x_train, x_test, y_train, y_test)
+    #ex_1_2_a(x_train, x_test, y_train, y_test)
 
     # Add noise to the data:
-    x_train_noisy = x_train + np.random.randn(60,1) * .5
+    x_train_noisy = x_train + np.random.randn(60, 1) * .5
     y_train_noisy = y_train + np.random.randn(60) * .5
 
     ## 1.2 b)
