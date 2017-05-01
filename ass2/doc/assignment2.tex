@@ -7,6 +7,7 @@
 \usepackage{tabularx}
 \usepackage{graphicx}
 \usepackage{float}
+\usepackage{color}
 \usepackage{amssymb,amsmath,wasysym}
 
 \addbibresource{bib1.bib}
@@ -280,17 +281,17 @@ of the training set will be used as validation set.
   \item Using early stopping parameter for neural network API
   (\texttt{early\_stopping = True}) from Figure \ref{1_2_b}.
   \item $\alpha = 10^{-3}$ derived from Figure \ref{1_2_a}.
+  \item min MSE: $0.4787516928151623$ at seed: $4.0$
 \end{itemize}
 
 \textbf{Results}
 
-\texttt{
-Training MSE \\
+\texttt{Training MSE \\
 - min = 0.5278345203427149 \\
 - max = 1.5830727895816807 \\
 - mean = 0.8633455019924664 \\
 - std = 0.3563329403361676\\
-Test MSE 
+Test MSE \\
 - min = 0.4787516928151623 \\
 - max = 1.5500468662266857 \\
 - mean = 0.8232890101751599 \\
@@ -303,7 +304,63 @@ Test MSE
 
 \section{Face Recognition with Neural Networks}
 
+\begin{figure}[H]
+	\centering
+  \includegraphics[width=\textwidth]{figures/2_images.png}
+	\caption{Example Images}
+	\label{2_images}
+\end{figure}
+
 \subsection{Pose Recognition}
+
+\textbf{Images}
+
+\textbf{Confusion matrix}
+
+\begin{align*}C =
+\begin{pmatrix}
+126 & 4 & 5 & 6 \\
+3 & 136 & 0 & 2 \\
+0 & 1 & 133 & 4 \\
+11 & 5 & 2 & 126
+\end{pmatrix}
+\end{align*}
+
+\begin{center}
+\begin{tabular}{| r | c | c | c | c | }
+\hline
+& \rotatebox{90}{straight} & \rotatebox{90}{left} & \rotatebox{90}{right} &
+\rotatebox{90}{up} \\
+\hline
+straight & \textcolor{green}{\textbf{126}} & \textcolor{red}{\textbf{4}} &
+\textcolor{red}{\textbf{5}} & \textcolor{red}{\textbf{6}} \\
+\hline 
+left & \textcolor{red}{\textbf{3}} & \textcolor{green}{\textbf{136}} & 0 &
+\textcolor{red}{\textbf{2}} \\ 
+\hline 
+right & 0 & \textcolor{red}{\textbf{1}} & \textcolor{green}{\textbf{133}} &
+\textcolor{red}{\textbf{4}} \\
+\hline 
+up & \textcolor{red}{\textbf{11}} & \textcolor{red}{\textbf{5}} &
+\textcolor{red}{\textbf{2}} & \textcolor{green}{\textbf{126}} \\ \hline
+\end{tabular}
+\end{center}
+
+\textbf{Discussion}
+
+\begin{figure}[H]
+	\centering
+  \includegraphics[width=\textwidth]{figures/2_1_coeff.png}
+	\caption{Weight in hidden layers}
+	\label{2_1_coeff}
+\end{figure}
+
+
+\begin{itemize}
+  \item There seems to be less confusion on left and right than on up
+  (especially in combination with straight).
+  \item sunglasses, hair, nose, eyes seems to get more weight
+\end{itemize}
 
 \subsection{Face Recognition}
 

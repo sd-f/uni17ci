@@ -331,8 +331,11 @@ def ex_1_2_c(x_train, x_test, y_train, y_test):
                           early_stopping=True,
                           random_state=seed)
         nn.fit(x_train, y_train)
+        test_mse = calculate_mse(nn, x_test, y_test)
         train_mses.append(calculate_mse(nn, x_train, y_train))
-        test_mses.append(calculate_mse(nn, x_test, y_test))
+        test_mses.append(test_mse)
+        if np.min(np.array(test_mses)) >= test_mse:
+            print("New min MSE: "+str(float(test_mse)) + " seed: " + str(float(seed)))
 
 
     print("Training MSE"

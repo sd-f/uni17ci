@@ -40,15 +40,15 @@ def main():
         data['target1'], normalize(data['input1']), data['target2'], normalize(data['input2'])
 
     ## Plot some random images
-    plot_random_images(input2)
+    # plot_random_images(input2)
     ## End plot some random images
 
     ## 2.1
-    ex_2_1(input2, target2)
+    # ex_2_1(input2, target2)
     ## End 2.1
 
     ## 2.2
-    # ex_2_2(input1, target1, input2, target2)
+    ex_2_2(input1, target1, input2, target2)
     ## End 2.2
 
 
