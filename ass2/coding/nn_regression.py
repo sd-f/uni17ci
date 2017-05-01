@@ -250,25 +250,100 @@ def ex_1_2_b(x_train, x_test, y_train, y_test):
     your old training set become your new training set and the rest is your validation set. Watch
     out, it is crucial to permute the order of the training set before splitting because the data in
     given in increasing order of x.
-    • Write code to train a neural network with n = 40 and α = 10−3 on each selection of the
+    • Write code to train a neural network with n = 40 and α = 10^−3 on each selection of the
     training set. Train for 2000 iterations using the ‘lbfgs’ solver for 10 different random seeds and
     monitor the error on each set every 20 iterations. For each individual seed, generate the list of
-    (1) the test errors after the last iteration, (2) the test errors when the error is minimal on the
-    validation set, (3) the ideal test error when it was minimizing the error on the test set.
+     (1) the test errors after the last iteration
+     (2) the test errors when the error is minimal on the validation set
+     (3) the ideal test error when it was minimizing the error on the test set.
     '''
+    n = 40
+    alpha = 10**-3
+    seeds = np.array(range(1, 11))
+    max_iterations = 2000
 
+    # new training set, every 2nd training sample
+    # y_train_shuffled = np.copy(x_train)
+    # np.random.shuffle(x_train_shuffled)
+    x_train_new = np.array(x_train)[0::2]
+    y_train_new = np.array(y_train)[0::2]
+    x_validation = np.array(x_train)[1::2]
+    y_validation = np.array(y_train)[1::2]
+    test_mse_end = np.zeros(seeds.shape[0])
+    test_mse_early_stopping = np.zeros(seeds.shape[0])
+    test_mse_ideal = np.zeros(seeds.shape[0])
+    for index_seed, seed in np.ndenumerate(seeds):
+        mse_end = 100.0
+        mse_early_stopping = 100.0
+        mse_ideal = 100.0
+        nn = MLPRegressor(solver='lbfgs',
+                          max_iter=1,
+                          warm_start=True,
+                          activation='logistic',
+                          hidden_layer_sizes=(n,),
+                          alpha=alpha,
+                          random_state=seed)
+        for iteration in range(max_iterations):
+            nn.fit(x_train_new, y_train_new)
+            if iteration % 20 == 0:
+                test_mse = calculate_mse(nn, x_test, y_test)
+                validation_mse = calculate_mse(nn, x_validation, y_validation)
+                if mse_early_stopping > validation_mse:
+                    mse_early_stopping = validation_mse
+                if mse_ideal > test_mse:
+                    mse_ideal = test_mse
+            if iteration == (max_iterations-1):
+                mse_end = calculate_mse(nn, x_test, y_test)
+        test_mse_end[index_seed] = mse_end
+        test_mse_early_stopping[index_seed] = mse_early_stopping
+        test_mse_ideal[index_seed] = mse_ideal
 
-
+    plot_bars_early_stopping_mse_comparison(test_mse_end, test_mse_early_stopping, test_mse_ideal)
     pass
 
 def ex_1_2_c(x_train, x_test, y_train, y_test):
-    '''
+    """
     Solution for exercise 1.2 c)
     :param x_train:
     :param x_test:
     :param y_train:
     :param y_test:
     :return:
+    """
     '''
-    ## TODO
+    Combining the results from all the previous questions, train a network with the ideal number
+    of hidden neurons, regularization parameter and solver choice. Use 10 seeds, a validation set
+    and early stopping to identify one particular network (a single seed) that performs optimally.
+    '''
+
+    n = 8
+    alpha = 10 ** -3
+    seeds = np.array(range(1, 11))
+    solver = 'sgd'
+    train_mses = []
+    test_mses = []
+    for seed in seeds:
+        nn = MLPRegressor(solver=solver,
+                          max_iter=2000,
+                          activation='logistic',
+                          hidden_layer_sizes=(n,),
+                          alpha=alpha,
+                          early_stopping=True,
+                          random_state=seed)
+        nn.fit(x_train, y_train)
+        train_mses.append(calculate_mse(nn, x_train, y_train))
+        test_mses.append(calculate_mse(nn, x_test, y_test))
+
+
+    print("Training MSE"
+          + " min = " + str(float(np.min(np.array(train_mses))))
+          + " max = " + str(float(np.max(np.array(train_mses))))
+          + " mean = " + str(float(np.mean(np.array(train_mses))))
+          + " std = " + str(float(np.std(np.array(train_mses)))))
+    print("Test MSE"
+          + " min = " + str(float(np.min(np.array(test_mses))))
+          + " max = " + str(float(np.max(np.array(test_mses))))
+          + " mean = " + str(float(np.mean(np.array(test_mses))))
+          + " std = " + str(float(np.std(np.array(test_mses)))))
+
     pass
