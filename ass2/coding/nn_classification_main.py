@@ -2,6 +2,7 @@ import json
 
 import numpy as np
 from sklearn.preprocessing import normalize
+import matplotlib.pyplot as plt
 
 from nn_classification import ex_2_1, ex_2_2
 from nn_classification_plot import plot_histogram_of_acc, plot_hidden_layer_weights, plot_random_images
@@ -17,7 +18,6 @@ Fill in all the sections containing TODOs!
 """
 
 __author__ = 'bellec,subramoney'
-
 
 def load_data():
     """
@@ -46,6 +46,7 @@ def main():
     ## 2.1
     # ex_2_1(input2, target2)
     ## End 2.1
+
 
     ## 2.2
     ex_2_2(input1, target1, input2, target2)
