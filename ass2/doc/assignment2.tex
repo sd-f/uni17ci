@@ -315,7 +315,7 @@ Test MSE \\
 
 \textbf{Images}
 
-\textbf{Confusion matrix}
+\textbf{Confusion matrix\autocite{wiki:cm}}
 
 \begin{align*}C =
 \begin{pmatrix}
@@ -362,8 +362,87 @@ up & \textcolor{red}{\textbf{11}} & \textcolor{red}{\textbf{5}} &
   \item sunglasses, hair, nose, eyes seems to get more weight
 \end{itemize}
 
+\newpage
 \subsection{Face Recognition}
 
+Simple face recognition implementation using scikit-learn classification API to
+train a neural network.
+
+\textbf{Confusion matrix\autocite{wiki:cm}}
+
+\rotatebox{90}{
+\begin{tabular}{|r||c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c|c| }
+\hline
+&1&2&3&4&5&6&7&8&9&10&11&12&13&14&15&16&17&18&19&20\\ \hline\hline
+1&27&0&0&0&0&0&2&0&0&0&0&0&0&0&0&0&0&0&0&0\\ \hline
+2&0&29&0&0&0&0&0&0&0&0&0&0&0&0&0&0&0&0&0&0\\ \hline
+3&0&0&28&0&0&0&0&0&0&0&0&0&0&0&0&0&0&0&0&0\\ \hline
+4&0&1&0&27&0&0&0&0&0&0&0&0&0&0&0&0&0&0&0&0\\ \hline
+5&0&0&0&0&24&3&0&0&0&0&0&0&0&0&0&0&0&0&0&0\\ \hline
+6&0&0&0&0&0&28&0&0&0&0&0&0&0&0&0&0&0&0&0&0\\ \hline
+7&0&0&0&0&0&8&19&0&0&1&0&0&0&0&0&0&0&0&0&0\\ \hline
+8&0&6&0&0&0&0&0&23&0&0&0&0&0&0&0&0&0&0&0&0\\ \hline
+9&0&0&0&0&0&0&0&0&29&0&0&0&0&0&0&0&0&0&0&0\\ \hline
+10&0&0&0&0&0&0&0&0&0&28&0&0&0&0&0&0&0&0&0&0\\ \hline
+11&0&0&0&0&0&0&0&0&0&0&28&0&0&0&0&0&0&0&0&0\\ \hline
+12&0&0&0&0&0&0&0&0&0&0&0&23&0&0&0&2&0&0&0&0\\ \hline
+13&0&0&0&0&0&0&0&0&0&0&0&0&29&0&0&0&0&0&0&0\\ \hline
+14&0&0&0&0&0&0&0&0&0&0&0&0&0&27&0&0&0&0&0&0\\ \hline
+15&0&0&0&0&0&0&0&0&0&0&0&0&0&0&29&0&0&0&0&0\\ \hline
+16&0&0&0&0&0&0&0&0&0&0&0&0&0&0&0&29&0&0&0&0\\ \hline
+17&0&0&0&0&0&0&0&0&0&0&0&0&0&0&0&0&27&0&0&0\\ \hline
+18&0&0&0&0&0&0&0&0&0&0&0&0&0&0&0&0&0&29&0&0\\ \hline
+19&0&0&0&0&0&0&0&0&0&0&0&0&0&0&0&0&0&0&29&0\\ \hline
+20&0&0&0&0&0&1&0&0&0&0&0&0&0&0&0&0&0&0&0&28\\ \hline
+\end{tabular}
+ }
+
+\newpage
+\textbf{Misclassification}
+
+\begin{figure}[H]
+	\centering
+  \includegraphics[width=0.5\textwidth]{figures/2_2_img1.png}
+	\caption{Misclassified Example 1, confusion (1/7)}
+	\label{2_2_img1}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+  \includegraphics[width=0.5\textwidth]{figures/2_2_img2.png}
+	\caption{Misclassified Example 2, confusion (6/7)}
+	\label{2_2_img2}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+  \includegraphics[width=0.5\textwidth]{figures/2_2_img3.png}
+	\caption{Misclassified Example 3, confusion (2/4)}
+	\label{2_2_img3}
+\end{figure}
+
+\begin{figure}[H]
+	\centering
+  \includegraphics[width=0.5\textwidth]{figures/2_2_img5.png}
+	\caption{Misclassified Example 4, confusion (6/5)}
+	\label{2_2_img5}
+\end{figure}
+
+\newpage
+\textbf{Discussion}
+
+\begin{itemize}
+  \item All in all great results and very few misclassifications (see confusion
+  matrix table above).
+  \item Different seeded random starting points lead to different local minima
+  and further (with another curvature that misses some points) to different
+  resulting class.
+  \item sunglasses and dark backgounrd seems to be a problem (some kind of edge
+  detection might be going on - guessing since nobody knows what is really going
+  on :)). Looking up wearing sunglasses may lead to same cluster as hair.
+\end{itemize}
+
+\newpage
 \printbibliography
 
 \end{document}
