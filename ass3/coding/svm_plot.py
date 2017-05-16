@@ -114,7 +114,10 @@ def plot_svm_decision_boundary(svm, x_train, y_train, x_test=None, y_test=None):
     ax.contourf(xx, yy, Z, cmap=cm, alpha=.8, norm=MidpointNormalize(np.min(Z), np.max(Z), 0))
     ax.contour(xx, yy, Z, colors=['k', 'k', 'k'], linestyles=['--', '-', '--'], levels=[-1, 0, 1])
 
-    plt.scatter(svm.support_vectors_[:, 0], svm.support_vectors_[:, 1], s=80, facecolors='none', zorder=10)
+    # plt.scatter(svm.support_vectors_[:, 0], svm.support_vectors_[:, 1], s=80, facecolors='none', zorder=10)
+
+    plt.scatter(svm.support_vectors_[:, 0], svm.support_vectors_[:, 1],
+                s=80, facecolors='none', edgecolors='black', zorder=10)
     # Plot also the training points
     ax.scatter(x_train[:, 0], x_train[:, 1], c=y_train, cmap=cm_bright)
     if x_test is not None:
