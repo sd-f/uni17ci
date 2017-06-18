@@ -308,12 +308,13 @@ def plot_Y_scatter(X, M, Y, mu):
             py = np.append(py, y[1][1])
         plt.scatter(px, py, s=2, color=COLORS[m])
 
-    plt.scatter(X[:, 0], X[:, 1], s=1, color='lightgrey')
+    # plt.scatter(X[:, 0], X[:, 1], s=1, color='lightgrey')
     for m in range(M):
-        plt.scatter(mu[m, 0], mu[m, 1], s=100, color=COLORS[m], marker='+')
+        plt.scatter(mu[m, 0], mu[m, 1], s=100, color='black', marker='+', lw=4)
+        plt.scatter(mu[m, 0], mu[m, 1], s=100, color=COLORS[m], edgecolors='b', marker='+')
 
 def a2(X):
-    M = 5
+    M = 7
     max_iter = 100
     N = X.shape[0]
 
@@ -360,10 +361,10 @@ def main():
     y = np.loadtxt('data/y.data', skiprows = 0) # label: y
 
     # 1.) EM algorithm for GMM:
-    a1(X)
+    # a1(X)
 
     # 2.) K-means algorithm:
-    # a2(X)
+    a2(X)
 
     # 3.) Sampling from GMM
     # Y = a3()
