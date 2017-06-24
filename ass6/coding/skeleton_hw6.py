@@ -77,12 +77,39 @@ class HMM:
         X = np.asarray(X)
 
         # q_opt is the optimal state sequence; this is a default value
-        q_opt = np.array([0, 0, 1, 2])
+        # q_opt = np.array([0, 0, 1, 2])
+
 
         # TODO: implement Viterbi algorithm
 
+        N = X.shape[0]
+        q_opt = np.zeros(X.shape[0], dtype=np.int64)
+        delta = np.zeros((N, self.N_s))
+        psi = np.zeros((N, self.N_s))
+
+        # init
+        delta[0, :] = self.pi * self.B[:, X[0]]
+        psi[0, :] = 0  # redundant (after init .zeros)
+
+        # step
+        for n in range(1, N):
+            for i in range(self.N_s):
+                p_max = 0
+                p_max_i = -1
+                for j in range(self.N_s):
+                    p = delta[n-1, i] * self.A[i, j]
+                    if p > p_max:
+                        p_max = p
+                        p_max_i = j
+                delta[n, j] = max * self.B[j, X[n]]
+                psi[n, j] = p_max_i
+        print(delta)
+        print(psi)
         return q_opt
 
+    def viterbi_discrete_step(self, X):
+
+        return delta, psi
 
     def sample(self, N):
         """Draw a random state and corresponding observation sequence of length N from the model."""
